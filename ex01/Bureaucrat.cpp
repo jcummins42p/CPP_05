@@ -6,12 +6,12 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:07:45 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:27:57 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Forms.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat( void ) :
@@ -119,7 +119,7 @@ const char * Bureaucrat::GradeTooLowException::what() const throw()
 	return "TooLowException";
 }
 
-void	Bureaucrat::signForm( Forms &form ) {
+void	Bureaucrat::signForm( Form &form ) {
 
 	if (form.getSigned())
 	{
