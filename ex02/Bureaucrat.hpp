@@ -1,0 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
+/*   Updated: 2024/10/22 15:26:40 by jcummins         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef BUREAUCRAT_H
+# define BUREAUCRAT_H
+
+# include <iostream>
+# include "Form.hpp"
+
+# define GRADE_MAX 1
+# define GRADE_MIN 150
+
+class	Form;
+
+class	Bureaucrat
+{
+	public:
+		Bureaucrat	( void );
+		Bureaucrat	( std::string name, int grade );
+		Bureaucrat	( const Bureaucrat &other );
+		Bureaucrat	&operator=( const Bureaucrat &other );
+		~Bureaucrat	( void );
+
+		std::string		getName( void ) const;
+		int				getGrade( void ) const;
+
+		void			incrementGrade( void );
+		void			decrementGrade( void );
+		Bureaucrat		&operator++( void );
+		Bureaucrat		&operator--( void );
+		Bureaucrat		operator++( int );
+		Bureaucrat		operator--( int );
+
+		void			signForm( Form &form );
+
+		class	GradeTooHighException : public std::exception {
+			public:
+				const char *what() const throw();
+		} ;
+		class	GradeTooLowException : public std::exception {
+			public:
+				const char *what() const throw();
+		} ;
+
+	private:
+		const std::string	_name;
+		int					_grade;
+} ;
+
+
+std::ostream	&operator<<( std::ostream &os, const Bureaucrat &bcrat );
+
+#endif
+
