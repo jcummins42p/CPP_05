@@ -6,11 +6,12 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/21 15:26:28 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:07:45 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Forms.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat( void ) :
@@ -116,4 +117,16 @@ const char * Bureaucrat::GradeTooHighException::what() const throw()
 const char * Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return "TooLowException";
+}
+
+void	Bureaucrat::signForm( Forms &form ) {
+
+	if (form.getSigned())
+	{
+		std::cout 	<< _name << " couldn't sign " << form.getName()
+					<< " because it is already signed" << std::endl;
+		return ;
+	}
+	form.beSigned( *this );
+	std::cout << _name << " has signed form " << form.getName() << std::endl;
 }
