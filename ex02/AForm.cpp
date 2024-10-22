@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:26:20 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:35:33 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form( void ) :
+AForm::AForm( void ) :
 	_name("Default"),
 	_sign_requirement(GRADE_MIN),
 	_exec_requirement(GRADE_MAX),
 	_is_signed(false)
 {}
 
-Form::Form( std::string name, bool is_signed, int sign, int exec ) :
+AForm::AForm( std::string name, bool is_signed, int sign, int exec ) :
 	_name(name),
 	_sign_requirement(sign),
 	_exec_requirement(exec),
 	_is_signed(is_signed)
 {}
 
-Form::Form( const Form& other ) :
+AForm::AForm( const AForm& other ) :
 	_name(other._name),
 	_sign_requirement(other._sign_requirement),
 	_exec_requirement(other._exec_requirement),
 	_is_signed(other._is_signed)
 {}
 
-Form &Form::operator=( const Form& other ) {
+AForm &AForm::operator=( const AForm& other ) {
 	if (this != &other)
 	{
 		_is_signed = other.getSigned();
@@ -41,9 +41,9 @@ Form &Form::operator=( const Form& other ) {
 	return *this;
 }
 
-Form::~Form( void ) {}
+AForm::~AForm( void ) {}
 
-std::ostream &operator<<( std::ostream &os, const Form &form ) {
+std::ostream &operator<<( std::ostream &os, const AForm &form ) {
 	os 	<< form.getName() << std::endl
 		<< "Grade to sign = " << form.getSignRequirement() << std::endl
 		<< "Grade to exec = " << form.getExecRequirement() << std::endl;
@@ -57,36 +57,36 @@ std::ostream &operator<<( std::ostream &os, const Form &form ) {
 	return (os);
 }
 
-const char * Form::GradeTooHighException::what() const throw()
+const char * AForm::GradeTooHighException::what() const throw()
 {
 	return "TooHighException";
 }
 
-const char * Form::GradeTooLowException::what() const throw()
+const char * AForm::GradeTooLowException::what() const throw()
 {
 	return "TooLowException";
 }
 
-std::string Form::getName( void ) const {
+std::string AForm::getName( void ) const {
 	return _name;
 }
 
-int Form::getSignRequirement( void ) const {
+int AForm::getSignRequirement( void ) const {
 	return _sign_requirement;
 }
 
-int Form::getExecRequirement( void ) const {
+int AForm::getExecRequirement( void ) const {
 	return _exec_requirement;
 }
 
-bool Form::getSigned( void ) const {
+bool AForm::getSigned( void ) const {
 	return _is_signed;
 }
 
-void	Form::beSigned( const Bureaucrat &bcrat ) {
+void	AForm::beSigned( const Bureaucrat &bcrat ) {
 	bool	qualified = (bcrat.getGrade() <= _sign_requirement);
 
 	if (!qualified)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 	_is_signed = true;
 }

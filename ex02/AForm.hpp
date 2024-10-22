@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Forms.hpp                                          :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:25:40 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/22 15:33:33 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ class	Bureaucrat;
 class	AForm
 {
 	public:
-		Form	( void );
-		Form	( std::string name, bool is_signed, int sign, int exec );
-		Form	( const Form &other );
-		Form	&operator=( const Form &other );
-		~Form	( void );
+		AForm	( void );
+		AForm	( std::string name, bool is_signed, int sign, int exec );
+		AForm	( const AForm &other );
+		AForm	&operator=( const AForm &other );
+		~AForm	( void );
 
 		std::string 	getName( void ) const ;
 		int 			getSignRequirement( void ) const ;
@@ -51,6 +51,6 @@ class	AForm
 		bool				_is_signed;
 } ;
 
-std::ostream &operator<<( std::ostream &os, const Form &form );
+std::ostream &operator<<( std::ostream &os, const AForm &form );
 
 #endif
