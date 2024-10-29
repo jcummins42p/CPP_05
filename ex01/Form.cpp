@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:27:33 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:41:33 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ std::ostream &operator<<( std::ostream &os, const Form &form ) {
 	os 	<< form.getName() << std::endl
 		<< "Grade to sign = " << form.getSignRequirement() << std::endl
 		<< "Grade to exec = " << form.getExecRequirement() << std::endl;
-	switch (form.getSigned()) {
-		case (true):
+	switch ((int)form.getSigned()) {
+		case (1):
 			os << "Is signed." << std::endl;
 			break;
-		case (false):
+		case (0):
 			os << "Is not signed." << std::endl;
 	}
 	return (os);

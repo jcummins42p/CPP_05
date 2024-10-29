@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:28:20 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:42:03 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	test_bureaucrat(std::string test_name, int test_grade)
 
 int	main(void)
 {
-	test_bureaucrat("Peter", 42);
+	test_bureaucrat("Peter", 43);
 	test_bureaucrat("Bernie", 1);
 	test_bureaucrat("Helena", 150);
 	test_bureaucrat("Gareth", 0);

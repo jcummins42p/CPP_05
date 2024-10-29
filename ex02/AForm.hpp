@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:33:33 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/29 19:06:13 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ class	AForm
 		AForm	&operator=( const AForm &other );
 		~AForm	( void );
 
-		std::string 	getName( void ) const ;
-		int 			getSignRequirement( void ) const ;
-		int 			getExecRequirement( void ) const ;
-		bool 			getSigned( void ) const ;
+		virtual std::string 	getName( void ) const ;
+		virtual int		getSignRequirement( void ) const;
+		virtual int		getExecRequirement( void ) const;
+		virtual bool	getSigned( void ) const = 0;
 
-		void			beSigned( const Bureaucrat &bcrat );
+		virtual void	beSigned( const Bureaucrat &bcrat );
 
 		class GradeTooHighException : public std::exception
 		{
@@ -44,7 +44,7 @@ class	AForm
 			public:
 				const char *what() const throw();
 		} ;
-	private:
+	protected:
 		const std::string	_name;
 		const int			_sign_requirement;
 		const int			_exec_requirement;
