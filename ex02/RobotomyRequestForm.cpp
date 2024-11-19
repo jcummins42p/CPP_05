@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/30 16:22:21 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:27:42 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include <cstdlib>	// required for rand()
 
-ShrubberyCreationForm::ShrubberyCreationForm( void ) :
-	AForm("Shubbery Creation Form", false, 145, 137),
+RobotomyRequestForm::RobotomyRequestForm( void ) :
+	AForm("Robotomy Request Form", false, 72, 45),
 	_target("Default")
 {
 	std::cout << this->getName() << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) :
-	AForm("Shubbery Creation Form", false, 145, 137),
+RobotomyRequestForm::RobotomyRequestForm( std::string target ) :
+	AForm("Robotomy Request Form", false, 72, 45),
 	_target(target)
 {
 	std::cout << this->getName() << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm& other ) :
+RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm& other ) :
 	AForm(other.getName(), other.getSigned(), other.getSignRequirement(), other.getExecRequirement()),
 	_target( other.getTarget() )
 {
 	std::cout << this->getName() << std::endl;
 }
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=( const ShrubberyCreationForm& other ) {
+RobotomyRequestForm &RobotomyRequestForm::operator=( const RobotomyRequestForm& other ) {
 	if (this != &other)
 	{
 		AForm::operator=(other);
@@ -41,14 +42,19 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=( const ShrubberyCreation
 	return *this;
 }
 
-std::string ShrubberyCreationForm::getTarget( void ) const {
+std::string RobotomyRequestForm::getTarget( void ) const {
 	return _target;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm( void ) {}
+RobotomyRequestForm::~RobotomyRequestForm( void ) {}
 
-void	ShrubberyCreationForm::execute( const Bureaucrat &bcrat ) const {
+void	RobotomyRequestForm::execute( const Bureaucrat &bcrat ) const {
 	if (bcrat.getGrade() > this->getExecRequirement())
-		throw AForm::GradeTooLowException();
-	std::cout << "Print ASCII tree in target " << _target << std::endl;
+		throw Bureaucrat::GradeTooLowException();
+	std::cout << "*** LOUD DRILLING SOUNDS *** : ";
+	srand(time(0));
+	if (rand() % 2 == 0)
+		std::cout << "Robotomoized target " << _target << std::endl;
+	else
+		std::cout << "failed to robotomize target " << _target << std::endl;
 }

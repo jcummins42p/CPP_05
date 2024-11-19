@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/29 18:29:39 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:15:56 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 AForm::AForm( void ) :
 	_name("Default"),
 	_sign_requirement(GRADE_MIN),
-	_exec_requirement(GRADE_MAX),
+	_exec_requirement(GRADE_MIN),
 	_is_signed(false)
-{}
+{	std::cout << "Constructed new default form: ";	}
 
 AForm::AForm( std::string name, bool is_signed, int sign, int exec ) :
 	_name(name),
 	_sign_requirement(sign),
 	_exec_requirement(exec),
 	_is_signed(is_signed)
-{}
+{	std::cout << "Constructed new form: ";	}
 
 AForm::AForm( const AForm& other ) :
 	_name(other._name),
 	_sign_requirement(other._sign_requirement),
 	_exec_requirement(other._exec_requirement),
 	_is_signed(other._is_signed)
-{}
+{	std::cout << "Constructed new copied form: ";	}
 
 AForm &AForm::operator=( const AForm& other ) {
 	if (this != &other)
@@ -41,28 +41,28 @@ AForm &AForm::operator=( const AForm& other ) {
 	return *this;
 }
 
-AForm::~AForm( void ) {}
+AForm::~AForm( void ) {	std::cout << "Destroyed form" << std::endl; }
 
 std::ostream &operator<<( std::ostream &os, const AForm &form ) {
 	os 	<< form.getName() << std::endl
 		<< "Grade to sign = " << form.getSignRequirement() << std::endl
 		<< "Grade to exec = " << form.getExecRequirement() << std::endl;
-	switch (form.getSigned()) {
-		case (true):
+	switch ((int)form.getSigned()) {
+		case (1):
 			os << "Is signed." << std::endl;
 			break;
-		case (false):
+		case (0):
 			os << "Is not signed." << std::endl;
 	}
 	return (os);
 }
 
-const char * AForm::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {
 	return "TooHighException";
 }
 
-const char * AForm::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {
 	return "TooLowException";
 }

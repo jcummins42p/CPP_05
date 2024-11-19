@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:47:12 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/30 16:26:50 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 Bureaucrat::Bureaucrat( void ) :
 	_name("none"),
 	_grade(GRADE_MIN)
-{}
+{
+	std::cout << "Constructed new default bureaucrat " << *this;
+}
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) :
 	_name(name)
@@ -30,12 +32,15 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) :
 	}
 	else
 		_grade = grade;
+	std::cout << "Constructed new bureaucrat " << *this;
 }
 
 Bureaucrat::Bureaucrat( const Bureaucrat& other ) :
 	_name(other._name),
 	_grade(other._grade)
-{}
+{
+	std::cout << "Constructed copied bureaucrat " << *this;
+}
 
 Bureaucrat &Bureaucrat::operator=( const Bureaucrat& other ) {
 	if (this != &other)
@@ -119,7 +124,7 @@ const char * Bureaucrat::GradeTooLowException::what() const throw()
 	return "TooLowException";
 }
 
-void	Bureaucrat::signForm( AForm &form ) {
+void	Bureaucrat::signForm( AForm &form ) const {
 
 	if (form.getSigned()) {
 		std::cout 	<< _name << " couldn't sign " << form.getName()
@@ -129,4 +134,13 @@ void	Bureaucrat::signForm( AForm &form ) {
 		form.beSigned( *this );
 		std::cout << _name << " has signed form " << form.getName() << std::endl;
 	}
+}
+
+void	Bureaucrat::execForm( AForm &form ) const {
+	if (_grade <= form.getExecRequirement())
+	{
+		std::cout << _name << " has executed form " << form.getName() << std::endl;
+		form.execute( *this );
+	}
+	else throw Bureaucrat::GradeTooLowException();
 }

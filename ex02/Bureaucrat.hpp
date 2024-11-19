@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:32:11 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:13:24 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ class	Bureaucrat
 		Bureaucrat		operator++( int );
 		Bureaucrat		operator--( int );
 
-		void			signForm( AForm &form );
+		void			signForm( AForm &form ) const;
+		void			execForm( AForm &form ) const;
 
 		class	GradeTooHighException : public std::exception {
 			public:
