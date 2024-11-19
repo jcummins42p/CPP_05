@@ -6,7 +6,7 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/19 18:48:33 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/19 21:22:08 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ NAME = forms
 CXX = c++
 CXXFLAGS = -g -Werror -Wextra -Wall -pedantic -std=c++98
 
-SRCS = main.cpp Form.cpp Bureaucrat.cpp
+SRCS = main.cpp \
+	   Form.cpp \
+	   Bureaucrat.cpp
 OBJS = $(SRCS:%.cpp=%.o)
-HEADS = Bureaucrat.hpp Form.hpp
+HEADS = Bureaucrat.hpp \
+		Form.hpp
 
 all: $(NAME)
 

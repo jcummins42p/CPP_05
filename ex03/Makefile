@@ -6,28 +6,29 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/19 21:24:45 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/19 21:53:14 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = more_forms
+NAME = interns
 
 CXX = c++
 CXXFLAGS = -g -Werror -Wextra -Wall -pedantic -std=c++98
 
-SRCS =	main.cpp \
-		AForm.cpp \
-		Bureaucrat.cpp \
-		PresidentialPardonForm.cpp \
-		RobotomyRequestForm.cpp \
-		ShrubberyCreationForm.cpp
-HEADS = AForm.hpp \
-		Bureaucrat.hpp \
-		PresidentialPardonForm.hpp \
-		RobotomyRequestForm.hpp \
-		ShrubberyCreationForm.hpp
+SRCS = main.cpp \
+	AForm.cpp \
+	Bureaucrat.cpp \
+	PresidentialPardonForm.cpp \
+	RobotomyRequestForm.cpp \
+	ShrubberyCreationForm.cpp \
+	Intern.cpp
 OBJS = $(SRCS:%.cpp=%.o)
-
+HEADS = AForm.hpp \
+	Bureaucrat.hpp \
+	PresidentialPardonForm.hpp \
+	RobotomyRequestForm.hpp \
+	ShrubberyCreationForm.hpp \
+	Intern.hpp
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -49,4 +50,3 @@ fclean: clean
 re:	fclean all
 
 .PHONY: all clean fclean re
-

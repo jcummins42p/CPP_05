@@ -6,7 +6,7 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/19 18:46:30 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/19 21:20:58 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = bureaucrat
 CXX = c++
 CXXFLAGSS = -g -Werror -Wextra -Wall -pedantic -std=c++98
 
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp \
+	   Bureaucrat.cpp
 OBJS = $(SRCS:%.cpp=%.o)
 HEADS = Bureaucrat.hpp
 
