@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/30 12:15:56 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:56:57 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,6 @@ std::ostream &operator<<( std::ostream &os, const AForm &form ) {
 	return (os);
 }
 
-const char *AForm::GradeTooHighException::what() const throw()
-{
-	return "TooHighException";
-}
-
-const char *AForm::GradeTooLowException::what() const throw()
-{
-	return "TooLowException";
-}
-
 std::string AForm::getName( void ) const {
 	return _name;
 }
@@ -87,6 +77,24 @@ void	AForm::beSigned( const Bureaucrat &bcrat ) {
 	bool	qualified = (bcrat.getGrade() <= _sign_requirement);
 
 	if (!qualified)
-		throw AForm::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException(bcrat.getGrade());
 	_is_signed = true;
+}
+
+// AFORM Exceptions
+
+const char *AForm::GradeException::what() const throw() {
+	return _message.c_str();
+}
+
+AForm::GradeTooLowException::GradeTooLowException( int grade ) throw() {
+	std::ostringstream oss;
+	oss << "Error: Form grade " << grade << " too low";
+	_message = oss.str();
+}
+
+AForm::GradeTooHighException::GradeTooHighException( int grade ) throw() {
+	std::ostringstream oss;
+	oss << "Error: Form grade " << grade << " too high";
+	_message = oss.str();
 }

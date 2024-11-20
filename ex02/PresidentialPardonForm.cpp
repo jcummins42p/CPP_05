@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/30 16:21:34 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:57:43 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ PresidentialPardonForm::~PresidentialPardonForm( void ) {}
 
 void	PresidentialPardonForm::execute( const Bureaucrat &bcrat ) const {
 	if (bcrat.getGrade() > this->getExecRequirement())
-		throw Bureaucrat::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException( bcrat.getGrade());
 	std::cout << "Zaphod Beeblebrox pardons target " << _target << std::endl;
 }

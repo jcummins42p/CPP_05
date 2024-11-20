@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:27:57 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:33:18 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) :
 	_name(name)
 {
 	if (grade < GRADE_MAX) {
-		throw GradeTooHighException();
+		throw GradeTooHighException(grade);
 	}
 	if (grade > GRADE_MIN) {
-		throw GradeTooLowException();
+		throw GradeTooLowException(grade);
 	}
 	else
 		_grade = grade;
@@ -43,12 +43,12 @@ Bureaucrat &Bureaucrat::operator=( const Bureaucrat& other ) {
 		if (other._grade < GRADE_MAX)
 		{
 			_grade = GRADE_MAX;
-			throw Bureaucrat::GradeTooHighException();
+			throw Bureaucrat::GradeTooHighException(other.getGrade());
 		}
 		if (other._grade > GRADE_MIN)
 		{
 			_grade = GRADE_MIN;
-			throw Bureaucrat::GradeTooLowException();
+			throw Bureaucrat::GradeTooLowException(other.getGrade());
 		}
 		else
 			_grade = other._grade;
@@ -67,13 +67,17 @@ int Bureaucrat::getGrade() const {
 }
 
 Bureaucrat &Bureaucrat::operator++( void ) {
-	if (_grade != 0)
+	if (_grade >= GRADE_MIN)
+		throw Bureaucrat::GradeTooLowException(_grade + 1);
+	else
 		_grade--;
 	return (*this);
 }
 
 Bureaucrat &Bureaucrat::operator--( void ) {
-	if (_grade != 0)
+	if (_grade <= GRADE_MAX)
+		throw Bureaucrat::GradeTooHighException(_grade - 1);
+	else
 		_grade++;
 	return (*this);
 }
@@ -81,7 +85,7 @@ Bureaucrat &Bureaucrat::operator--( void ) {
 Bureaucrat Bureaucrat::operator++( int ) {
 	Bureaucrat out = *this;
 	if (_grade >= GRADE_MIN)
-		throw Bureaucrat::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException(_grade + 1);
 	else
 		_grade++;
 	return (out);
@@ -90,7 +94,7 @@ Bureaucrat Bureaucrat::operator++( int ) {
 Bureaucrat Bureaucrat::operator--( int ) {
 	Bureaucrat out = *this;
 	if (_grade <= GRADE_MAX)
-		throw Bureaucrat::GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException(_grade - 1);
 	else
 		_grade--;
 	return (out);
@@ -109,24 +113,38 @@ std::ostream	&operator<<( std::ostream &os, const Bureaucrat &bcrat ) {
 	return (os);
 }
 
-const char * Bureaucrat::GradeTooHighException::what() const throw()
+const char * Bureaucrat::GradeException::what() const throw()
 {
-	return "TooHighException";
+	return _message.c_str();
 }
 
-const char * Bureaucrat::GradeTooLowException::what() const throw()
+Bureaucrat::GradeTooHighException::GradeTooHighException( int grade ) throw()
 {
-	return "TooLowException";
+	std::ostringstream oss;
+	oss << "Error: Bureaucrat grade " << grade << " too high";
+	_message = oss.str();
+}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException( int grade ) throw()
+{
+	std::ostringstream oss;
+	oss << "Error: Bureaucrat Grade " << grade << " too low";
+	_message = oss.str();
 }
 
 void	Bureaucrat::signForm( Form &form ) {
-
-	if (form.getSigned())
-	{
+	std::cout 	<< getName() << " is trying to sign form: "
+				<< form.getName() << std::endl;
+	if (form.getSigned()) {
 		std::cout 	<< _name << " couldn't sign " << form.getName()
 					<< " because it is already signed" << std::endl;
-		return ;
 	}
-	form.beSigned( *this );
-	std::cout << _name << " has signed form " << form.getName() << std::endl;
+	else try {
+		form.beSigned(*this);
+		std::cout 	<< _name << " has signed form: "
+					<< form.getName() << std::endl;
+	}
+	catch (Form::GradeException &e) {
+		std::cout << e.what() << std::endl;
+	}
 }

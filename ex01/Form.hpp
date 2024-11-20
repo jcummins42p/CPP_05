@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:27:18 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:34:15 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,28 @@ class	Form
 		int 			getExecRequirement( void ) const ;
 		bool 			getSigned( void ) const ;
 
+		void			checkGrade( int grade );
+
 		void			beSigned( const Bureaucrat &bcrat );
 
-		class GradeTooHighException : public std::exception
-		{
+		class GradeException : public std::exception {
 			public:
+				GradeException( void ) throw() : _message("Grade Exception") {};
+				virtual ~GradeException( void ) throw() {};
+
 				const char *what() const throw();
+			protected:
+				std::string _message;
 		} ;
-		class GradeTooLowException : public std::exception
+		class GradeTooHighException : public GradeException
 		{
 			public:
-				const char *what() const throw();
+				GradeTooHighException( int grade ) throw();
+		} ;
+		class GradeTooLowException : public GradeException
+		{
+			public:
+				GradeTooLowException( int grade ) throw();
 		} ;
 	private:
 		const std::string	_name;

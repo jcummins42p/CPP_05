@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/29 16:41:33 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:45:52 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,20 @@ Form::Form( std::string name, bool is_signed, int sign, int exec ) :
 	_sign_requirement(sign),
 	_exec_requirement(exec),
 	_is_signed(is_signed)
-{}
+{
+	checkGrade(_sign_requirement);
+	checkGrade(_exec_requirement);
+}
 
 Form::Form( const Form& other ) :
 	_name(other._name),
 	_sign_requirement(other._sign_requirement),
 	_exec_requirement(other._exec_requirement),
 	_is_signed(other._is_signed)
-{}
+{
+	checkGrade(_sign_requirement);
+	checkGrade(_exec_requirement);
+}
 
 Form &Form::operator=( const Form& other ) {
 	if (this != &other)
@@ -57,14 +63,11 @@ std::ostream &operator<<( std::ostream &os, const Form &form ) {
 	return (os);
 }
 
-const char * Form::GradeTooHighException::what() const throw()
-{
-	return "TooHighException";
-}
-
-const char * Form::GradeTooLowException::what() const throw()
-{
-	return "TooLowException";
+void	Form::checkGrade( int grade ) {
+	if (grade < GRADE_MAX)
+		throw GradeTooHighException( grade );
+	if (grade > GRADE_MIN)
+		throw GradeTooLowException( grade );
 }
 
 std::string Form::getName( void ) const {
@@ -87,6 +90,25 @@ void	Form::beSigned( const Bureaucrat &bcrat ) {
 	bool	qualified = (bcrat.getGrade() <= _sign_requirement);
 
 	if (!qualified)
-		throw Form::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException(bcrat.getGrade());
 	_is_signed = true;
+}
+
+const char * Form::GradeException::what() const throw()
+{
+	return _message.c_str();
+}
+
+Form::GradeTooLowException::GradeTooLowException( int grade ) throw()
+{
+	std::ostringstream oss;
+	oss << "Error: Form Grade " << grade << " too low";
+	_message = oss.str();
+}
+
+Form::GradeTooHighException::GradeTooHighException( int grade ) throw()
+{
+	std::ostringstream oss;
+	oss << "Error: Form Grade " << grade << " too high";
+	_message = oss.str();
 }

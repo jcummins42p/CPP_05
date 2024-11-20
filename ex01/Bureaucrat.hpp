@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/22 15:27:49 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:03:29 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define BUREAUCRAT_H
 
 # include <iostream>
+# include <string>
+# include <sstream>	//	for ostringstream used in exception
 # include "Form.hpp"
 
 # define GRADE_MAX 1
@@ -42,13 +44,22 @@ class	Bureaucrat
 
 		void			signForm( Form &form );
 
-		class	GradeTooHighException : public std::exception {
+		class	GradeException : public std::exception {
 			public:
+				GradeException( void ) throw() : _message("Grade Exception") {};
+				virtual ~GradeException( void ) throw() {};
+
 				const char *what() const throw();
+			protected:
+				std::string	_message;
 		} ;
-		class	GradeTooLowException : public std::exception {
+		class	GradeTooHighException : public GradeException {
 			public:
-				const char *what() const throw();
+				GradeTooHighException(int grade) throw();
+		} ;
+		class	GradeTooLowException : public GradeException {
+			public:
+				GradeTooLowException(int grade) throw();
 		} ;
 
 	private:
@@ -60,4 +71,3 @@ class	Bureaucrat
 std::ostream	&operator<<( std::ostream &os, const Bureaucrat &bcrat );
 
 #endif
-

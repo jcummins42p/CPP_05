@@ -6,29 +6,28 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/19 21:53:14 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/20 18:41:26 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = interns
+NAME = more_forms
 
 CXX = c++
 CXXFLAGS = -g -Werror -Wextra -Wall -pedantic -std=c++98
 
-SRCS = main.cpp \
-	AForm.cpp \
-	Bureaucrat.cpp \
-	PresidentialPardonForm.cpp \
-	RobotomyRequestForm.cpp \
-	ShrubberyCreationForm.cpp \
-	Intern.cpp
-OBJS = $(SRCS:%.cpp=%.o)
+SRCS =	main.cpp \
+		AForm.cpp \
+		Bureaucrat.cpp \
+		PresidentialPardonForm.cpp \
+		RobotomyRequestForm.cpp \
+		ShrubberyCreationForm.cpp
 HEADS = AForm.hpp \
-	Bureaucrat.hpp \
-	PresidentialPardonForm.hpp \
-	RobotomyRequestForm.hpp \
-	ShrubberyCreationForm.hpp \
-	Intern.hpp
+		Bureaucrat.hpp \
+		PresidentialPardonForm.hpp \
+		RobotomyRequestForm.hpp \
+		ShrubberyCreationForm.hpp
+OBJS = $(SRCS:%.cpp=%.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -43,10 +42,16 @@ clean:
 	@echo "💥 Removing all object files"
 	@rm -f $(OBJS)
 
-fclean: clean
-	@echo "💥 Removing all object files and executable"
+fclean: clean tclean
+	@echo "💥 Removing executable"
 	@rm -f $(NAME)
+
+tclean:
+	@echo "💥 Burning down shrubbery files"
+	@rm -f *_shrubbery
+
 
 re:	fclean all
 
 .PHONY: all clean fclean re
+

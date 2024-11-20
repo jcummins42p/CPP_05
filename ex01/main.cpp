@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/29 16:42:03 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 17:35:18 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,16 @@
 
 void	test_bureaucrat(std::string test_name, int test_grade)
 {
-	Form planning("Planning permission", false, 42, 4);
-	std::cout << "Testing new bureaucrat " << test_name << std::endl;
 	try {
-		 Bureaucrat bcat(test_name, test_grade);
-		 try { bcat.signForm( planning ); }
-		 catch (Form::GradeTooLowException &e) {
-			std::cout << e.what() << std::endl;
-		 }
-		 catch (Form::GradeTooHighException &e) {
-			std::cout << e.what() << std::endl;
-		 }
+		Form planning("Planning permission", true, 42, 4);
+		Bureaucrat bcat(test_name, test_grade);
+		std::cout << "Testing new bureaucrat " << bcat.getName() << std::endl;
+		bcat.signForm( planning );
 	}
-	catch (Bureaucrat::GradeTooHighException &e) {
+	catch (Form::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
-	catch (Bureaucrat::GradeTooLowException &e) {
+	catch (Bureaucrat::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
 }

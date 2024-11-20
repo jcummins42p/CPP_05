@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/21 14:48:09 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:40:01 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define BUREAUCRAT_H
 
 # include <iostream>
+# include <sstream>
+# include <string>	// for string to cstring conversion
+# include <exception>
 
 # define GRADE_MAX 1
 # define GRADE_MIN 150
@@ -37,13 +40,22 @@ class	Bureaucrat
 		Bureaucrat		operator++( int );
 		Bureaucrat		operator--( int );
 
-		class	GradeTooHighException : public std::exception {
+		class	GradeException : public std::exception {
 			public:
+				GradeException( void ) throw() : _message("Grade Exception") {};
+				virtual ~GradeException( void ) throw() {};
+
 				const char *what() const throw();
+			protected:
+				std::string	_message;
 		} ;
-		class	GradeTooLowException : public std::exception {
+		class	GradeTooHighException : public GradeException {
 			public:
-				const char *what() const throw();
+				GradeTooHighException(int grade) throw();
+		} ;
+		class	GradeTooLowException : public GradeException {
+			public:
+				GradeTooLowException(int grade) throw();
 		} ;
 
 	private:

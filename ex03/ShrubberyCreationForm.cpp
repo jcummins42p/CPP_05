@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/30 16:22:21 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:36:18 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,24 @@ std::string ShrubberyCreationForm::getTarget( void ) const {
 ShrubberyCreationForm::~ShrubberyCreationForm( void ) {}
 
 void	ShrubberyCreationForm::execute( const Bureaucrat &bcrat ) const {
+	std::ofstream	fout;
+	std::string		outfile = _target + "_shrubbery";
+
 	if (bcrat.getGrade() > this->getExecRequirement())
-		throw AForm::GradeTooLowException();
-	std::cout << "Print ASCII tree in target " << _target << std::endl;
+		throw Bureaucrat::GradeTooLowException( bcrat.getGrade() );
+	fout.open(outfile.c_str());
+	if (!fout) {
+		std::cout << "Error: file could not be opened" << std::endl;
+		throw(std::exception());
+	}
+
+	fout 	<< "   *    *   *    " 	<< std::endl
+			<< "  * | */* */     "	<< std::endl
+			<< "    *\\ |* /*     "	<< std::endl
+			<< "      \\| /       "	<< std::endl
+			<< "       |/        "	<< std::endl
+			<< "       |         "	<< std::endl
+			<< "       |         "	<< std::endl
+			<< std::endl;
+	std::cout << "Printed ASCII tree in file " << outfile << std::endl;
 }

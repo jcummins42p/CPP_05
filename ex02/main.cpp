@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/30 16:59:57 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:15:23 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,11 @@ void	test_pardon(Bureaucrat &bcat)
 
 	std::cout 	<< std::endl << "Testing bureaucrat " << bcat
 	   			<< " with form " << test_form << std::endl;
-	try { bcat.signForm( test_form ); }
-	catch (AForm::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
+	try {
+		bcat.signForm( test_form );
+		bcat.executeForm( test_form );
 	}
-	catch (AForm::GradeTooHighException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try { bcat.execForm( test_form ); }
-	catch (AForm::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (AForm::GradeTooHighException &e) {
+	catch (Bureaucrat::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -47,18 +40,11 @@ void	test_robotomy(Bureaucrat &bcat)
 
 	std::cout 	<< std::endl << "Testing bureaucrat " << bcat
 	   			<< " with form " << test_form << std::endl;
-	try { bcat.signForm( test_form ); }
-	catch (AForm::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
+	try {
+		bcat.signForm( test_form );
+		bcat.executeForm( test_form );
 	}
-	catch (AForm::GradeTooHighException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try { bcat.execForm( test_form ); }
-	catch (AForm::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (AForm::GradeTooHighException &e) {
+	catch (Bureaucrat::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -69,19 +55,11 @@ void	test_shrubs(Bureaucrat &bcat)
 	ShrubberyCreationForm test_form("Elderflower");
 	std::cout	<< "Testing bureaucrat " << bcat
 	   			<< " with form " << test_form << std::endl;
-
-	try { bcat.signForm( test_form ); }
-	catch (AForm::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
+	try {
+		bcat.signForm( test_form );
+		bcat.executeForm( test_form );
 	}
-	catch (AForm::GradeTooHighException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	try { bcat.execForm( test_form ); }
-	catch (AForm::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (AForm::GradeTooHighException &e) {
+	catch (Bureaucrat::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -94,12 +72,9 @@ void	test_bureaucrat(std::string test_name, int test_grade)
 		test_robotomy( bcat );
 		test_pardon( bcat );
 	}
-	catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl; }
-	catch (Bureaucrat::GradeTooHighException &e) {
+	catch (Bureaucrat::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
-
 }
 
 int	main(void)

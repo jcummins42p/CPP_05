@@ -6,7 +6,7 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/19 21:24:45 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/20 18:38:26 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,13 @@ clean:
 	@echo "💥 Removing all object files"
 	@rm -f $(OBJS)
 
-fclean: clean
-	@echo "💥 Removing all object files and executable"
+fclean: clean tclean
+	@echo "💥 Removing executable"
 	@rm -f $(NAME)
+
+tclean:
+	@echo "💥 Burning down shrubbery files"
+	@rm -f *_shrubbery
 
 re:	fclean all
 
