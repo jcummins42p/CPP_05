@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 15:48:07 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:44:44 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,6 @@ Bureaucrat::GradeTooHighException::GradeTooHighException( int grade ) throw()
 Bureaucrat::GradeTooLowException::GradeTooLowException( int grade ) throw()
 {
 	std::ostringstream oss;
-	oss << "Grade " << grade << " too high";
+	oss << "Grade " << grade << " too low";
 	_message = oss.str();
 }
