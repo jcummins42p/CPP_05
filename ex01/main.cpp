@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 17:35:18 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:47:11 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 {
 	test_bureaucrat("Peter", 43);
 	test_bureaucrat("Bernie", 1);
-	test_bureaucrat("Helena", 150);
+	test_bureaucrat("Helena", 151);
 	test_bureaucrat("Gareth", 0);
 	return (0);
 }
