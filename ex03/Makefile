@@ -6,11 +6,11 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/20 18:41:26 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/20 20:00:28 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = more_forms
+NAME = internship
 
 CXX = c++
 CXXFLAGS = -g -Werror -Wextra -Wall -pedantic -std=c++98
@@ -20,12 +20,14 @@ SRCS =	main.cpp \
 		Bureaucrat.cpp \
 		PresidentialPardonForm.cpp \
 		RobotomyRequestForm.cpp \
-		ShrubberyCreationForm.cpp
+		ShrubberyCreationForm.cpp \
+		Intern.cpp
 HEADS = AForm.hpp \
 		Bureaucrat.hpp \
 		PresidentialPardonForm.hpp \
 		RobotomyRequestForm.hpp \
-		ShrubberyCreationForm.hpp
+		ShrubberyCreationForm.hpp \
+		Intern.hpp
 OBJS = $(SRCS:%.cpp=%.o)
 
 all: $(NAME)

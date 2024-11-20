@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/19 22:42:19 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:31:37 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ AForm	*Intern::makeForm( std::string const name, std::string const target) const
 
 AForm	*Intern::writeForm( std::string const name, std::string const target) const
 {
-	std::string forms[3] = {"RobotomyRequestForm", "PresidentialPardonForm", "ShrubberyCreationForm"};
+	std::string forms[3] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
 
 	int i = 0;
 	while (i < 3 && name != forms[i])
