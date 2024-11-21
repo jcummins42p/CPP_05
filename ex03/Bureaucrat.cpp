@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 18:09:01 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:42:43 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,38 @@ Bureaucrat::Bureaucrat( void ) :
 {}
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) :
-	_name(name)
+	_name(name),
+	_grade(grade)
 {
-	if (grade < GRADE_MAX) {
-		throw GradeTooHighException(grade);
-	}
-	if (grade > GRADE_MIN) {
-		throw GradeTooLowException(grade);
-	}
-	else
-		_grade = grade;
+	checkGrade(grade);
+	std::cout << "Constructed new " << *this;
 }
 
 Bureaucrat::Bureaucrat( const Bureaucrat& other ) :
 	_name(other._name),
 	_grade(other._grade)
-{}
+{
+	checkGrade(other.getGrade());
+	std::cout << "Constructed copied " << *this << " from " << other;
+}
 
 Bureaucrat &Bureaucrat::operator=( const Bureaucrat& other ) {
 	if (this != &other)
 	{
-		if (other._grade < GRADE_MAX)
-		{
-			_grade = GRADE_MAX;
-			throw Bureaucrat::GradeTooHighException(other.getGrade());
-		}
-		if (other._grade > GRADE_MIN)
-		{
-			_grade = GRADE_MIN;
-			throw Bureaucrat::GradeTooLowException(other.getGrade());
-		}
-		else
-			_grade = other._grade;
+		checkGrade(other.getGrade());
+		_grade = other.getGrade();
 	}
 	return *this;
 }
 
 Bureaucrat::~Bureaucrat( void ) {}
+
+void	Bureaucrat::checkGrade( int grade ) {
+	if (grade < GRADE_MAX)
+		throw Bureaucrat::GradeTooHighException(grade);
+	if (grade > GRADE_MIN)
+		throw Bureaucrat::GradeTooLowException(grade);
+}
 
 std::string Bureaucrat::getName() const {
 	return (this->_name);
@@ -67,49 +62,52 @@ int Bureaucrat::getGrade() const {
 }
 
 Bureaucrat &Bureaucrat::operator++( void ) {
-	if (_grade >= GRADE_MIN)
-		throw Bureaucrat::GradeTooLowException(_grade + 1);
-	else
-		_grade--;
+	checkGrade(_grade + 1);
+	_grade++;
 	return (*this);
 }
 
 Bureaucrat &Bureaucrat::operator--( void ) {
-	if (_grade <= GRADE_MAX)
-		throw Bureaucrat::GradeTooHighException(_grade - 1);
-	else
-		_grade++;
+	checkGrade(_grade - 1);
+	_grade--;
 	return (*this);
 }
 
 Bureaucrat Bureaucrat::operator++( int ) {
 	Bureaucrat out = *this;
-	if (_grade >= GRADE_MIN)
-		throw Bureaucrat::GradeTooLowException(_grade + 1);
-	else
+	try {
+		checkGrade(_grade + 1);
 		_grade++;
+	}
+	catch (Bureaucrat::GradeException &e) {
+		std::cout << e.what() << ": could not apply ++ operator" << std::endl;
+	}
 	return (out);
 }
 
 Bureaucrat Bureaucrat::operator--( int ) {
 	Bureaucrat out = *this;
-	if (_grade <= GRADE_MAX)
-		throw Bureaucrat::GradeTooHighException(_grade - 1);
-	else
+	try {
+		checkGrade(_grade - 1);
 		_grade--;
+	}
+	catch (Bureaucrat::GradeException &e) {
+		std::cout << e.what() << ": could not apply -- operator" << std::endl;
+	}
 	return (out);
 }
 
 void	Bureaucrat::incrementGrade() {
-	(*this)--;
+	--(*this);
 }
 
 void	Bureaucrat::decrementGrade() {
-	(*this)++;
+	++(*this);
 }
 
 std::ostream	&operator<<( std::ostream &os, const Bureaucrat &bcrat ) {
-	os << bcrat.getName()	<< ", bureaucrat grade " << bcrat.getGrade();
+	os << bcrat.getName()	<< ", bureaucrat grade "
+		<< bcrat.getGrade() << std::endl;
 	return (os);
 }
 
@@ -125,8 +123,8 @@ void	Bureaucrat::signForm( AForm &form ) {
 		std::cout 	<< _name << " has signed form: "
 					<< form.getName() << std::endl;
 	}
-	catch (Bureaucrat::GradeException &e) {
-		std::cout << e.what() << std::endl;
+	catch (AForm::GradeException &e) {
+		std::cout << e.what() << ": Bureaucrat " << _name << " could not sign " << form.getName() << std::endl;
 	}
 }
 
@@ -138,12 +136,10 @@ void	Bureaucrat::executeForm( AForm &form ) {
 					<< " because it is not signed" << std::endl;
 	}
 	else try { form.execute(*this); }
-	catch (Bureaucrat::GradeException &e) {
-		std::cout << e.what() << std::endl;
+	catch (AForm::GradeException &e) {
+		std::cout << e.what() << ": Bureaucrat " << _name << " could not sign " << form.getName() << std::endl;
 	}
 }
-
-// Bureaucrat exceptions
 
 const char * Bureaucrat::GradeException::what() const throw()
 {

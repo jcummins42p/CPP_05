@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 17:56:57 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:43:31 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,30 @@ AForm::AForm( void ) :
 	_sign_requirement(GRADE_MIN),
 	_exec_requirement(GRADE_MIN),
 	_is_signed(false)
-{	std::cout << "Constructed new default form: ";	}
+{	std::cout << "Constructed new default form: " << *this << std::endl;}
 
-AForm::AForm( std::string name, bool is_signed, int sign, int exec ) :
+AForm::AForm( std::string name, int sign, int exec ) :
 	_name(name),
 	_sign_requirement(sign),
 	_exec_requirement(exec),
-	_is_signed(is_signed)
-{	std::cout << "Constructed new form: ";	}
+	_is_signed(false)
+{
+	checkGrade( sign );
+	checkGrade( exec );
+	std::cout << "Constructed new form: " << *this << std::endl;
+}
 
 AForm::AForm( const AForm& other ) :
 	_name(other._name),
 	_sign_requirement(other._sign_requirement),
 	_exec_requirement(other._exec_requirement),
 	_is_signed(other._is_signed)
-{	std::cout << "Constructed new copied form: ";	}
+{
+	checkGrade( other.getSignRequirement() );
+	checkGrade( other.getExecRequirement() );
+	std::cout << "Copied form: " << *this
+				<< " from existing form " << other << std::endl;
+}
 
 AForm &AForm::operator=( const AForm& other ) {
 	if (this != &other)
@@ -41,7 +50,16 @@ AForm &AForm::operator=( const AForm& other ) {
 	return *this;
 }
 
-AForm::~AForm( void ) {	std::cout << "Destroyed form" << std::endl; }
+AForm::~AForm( void ) {
+	std::cout << "Destroyed form " << getName() << std::endl;
+}
+
+void	AForm::checkGrade( int grade ) {
+	if (grade < GRADE_MAX)
+		throw (GradeTooHighException(grade));
+	if (grade > GRADE_MIN)
+		throw (GradeTooLowException(grade));
+}
 
 std::ostream &operator<<( std::ostream &os, const AForm &form ) {
 	os 	<< form.getName() << std::endl
@@ -77,7 +95,7 @@ void	AForm::beSigned( const Bureaucrat &bcrat ) {
 	bool	qualified = (bcrat.getGrade() <= _sign_requirement);
 
 	if (!qualified)
-		throw Bureaucrat::GradeTooLowException(bcrat.getGrade());
+		throw GradeTooLowException(getSignRequirement());
 	_is_signed = true;
 }
 

@@ -6,28 +6,30 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 17:57:43 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:45:00 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm( void ) :
-	AForm("Presidential Pardon Form", false, 25, 5),
+	AForm("Presidential Pardon Form", 25, 5),
 	_target("Default")
 {
 	std::cout << this->getName() << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm( std::string target ) :
-	AForm("Presidential Pardon Form", false, 25, 5),
+	AForm("Presidential Pardon Form", 25, 5),
 	_target(target)
 {
 	std::cout << this->getName() << std::endl;
 }
 
 PresidentialPardonForm::PresidentialPardonForm( const PresidentialPardonForm& other ) :
-	AForm(other.getName(), other.getSigned(), other.getSignRequirement(), other.getExecRequirement()),
+	AForm(	other.getName(),
+			other.getSignRequirement(),
+			other.getExecRequirement()),
 	_target( other.getTarget() )
 {
 	std::cout << this->getName() << std::endl;
@@ -49,6 +51,6 @@ PresidentialPardonForm::~PresidentialPardonForm( void ) {}
 
 void	PresidentialPardonForm::execute( const Bureaucrat &bcrat ) const {
 	if (bcrat.getGrade() > this->getExecRequirement())
-		throw Bureaucrat::GradeTooLowException( bcrat.getGrade());
+		throw AForm::GradeTooLowException( getExecRequirement());
 	std::cout << "Zaphod Beeblebrox pardons target " << _target << std::endl;
 }

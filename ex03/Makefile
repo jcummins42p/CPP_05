@@ -6,7 +6,7 @@
 #    By: jcummins <jcummins@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/26 18:08:59 by jcummins          #+#    #+#              #
-#    Updated: 2024/11/20 20:00:28 by jcummins         ###   ########.fr        #
+#    Updated: 2024/11/21 15:03:04 by jcummins         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,6 @@ fclean: clean tclean
 tclean:
 	@echo "💥 Burning down shrubbery files"
 	@rm -f *_shrubbery
-
 
 re:	fclean all
 

@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 17:55:17 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:51:23 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ class	Bureaucrat;
 class	AForm
 {
 	public:
-		AForm	( void );
-		AForm	( std::string name, bool is_signed, int sign, int exec );
+		AForm	( std::string name, int sign, int exec );
 		AForm	( const AForm &other );
 		AForm	&operator=( const AForm &other );
 		virtual ~AForm	( void );
 
 		std::string 	getName( void ) const ;
-		int		getSignRequirement( void ) const;
-		int		getExecRequirement( void ) const;
-		bool	getSigned( void ) const;
-		virtual std::string getTarget( void ) const = 0;
+		int				getSignRequirement( void ) const;
+		int				getExecRequirement( void ) const;
+		bool			getSigned( void ) const;
+		std::string 	getTarget( void ) const;
 
 		void	beSigned( const Bureaucrat &bcrat );
+		void	checkGrade( int grade );
 
 		virtual void execute( const Bureaucrat &executor ) const = 0;
 
@@ -59,6 +59,8 @@ class	AForm
 				GradeTooLowException( int grade ) throw();
 		} ;
 	private:
+		AForm	( void );
+
 		const std::string	_name;
 		const int			_sign_requirement;
 		const int			_exec_requirement;

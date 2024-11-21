@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 16:34:15 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:18:37 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class	Form
 {
 	public:
 		Form	( void );
-		Form	( std::string name, bool is_signed, int sign, int exec );
+		Form	( std::string name, int sign, int exec );
 		Form	( const Form &other );
 		Form	&operator=( const Form &other );
 		~Form	( void );

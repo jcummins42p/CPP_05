@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 14:49:59 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:50:56 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	test_bureaucrat(std::string test_name, int test_grade)
 		 bcat.decrementGrade();
 		 std::cout << bcat << std::endl;
 	}
-	catch (Bureaucrat::GradeTooHighException &e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException &e) {
+	catch (Bureaucrat::GradeException &e) {
 		std::cout << e.what() << std::endl;
 	}
 }

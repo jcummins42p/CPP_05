@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 19:58:38 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:00:46 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,10 @@ void	test_pardon(Bureaucrat &bcat)
 	AForm *test_form = intern.makeForm("PresidentialPardonForm", "Trump");
 	if (!test_form)
 		return ;
-	std::cout 	<< std::endl << "Testing bureaucrat " << bcat
+	std::cout 	<< std::endl << "Testing bureaucrat " << bcat.getName()
 	   			<< " with form " << *test_form << std::endl;
-	try {
-		bcat.signForm( *test_form );
-		bcat.executeForm( *test_form );
-	}
-	catch (Bureaucrat::GradeException &e) {
-		std::cout << e.what() << std::endl;
-	}
+	bcat.signForm( *test_form );
+	bcat.executeForm( *test_form );
 	delete test_form;
 }
 
@@ -46,16 +41,10 @@ void	test_robotomy(Bureaucrat &bcat)
 	AForm *test_form = intern.makeForm("RobotomyRequestForm", "Lunatic");
 	if (!test_form)
 		return ;
-	std::cout	<< "Testing bureaucrat " << bcat
+	std::cout	<< "Testing bureaucrat " << bcat.getName()
 	   			<< " with form " << *test_form << std::endl;
-	std::cout	<< std::endl;
-	try {
-		bcat.signForm( *test_form );
-		bcat.executeForm( *test_form );
-	}
-	catch (Bureaucrat::GradeException &e) {
-		std::cout << e.what() << std::endl;
-	}
+	bcat.signForm( *test_form );
+	bcat.executeForm( *test_form );
 	delete test_form;
 }
 
@@ -67,15 +56,10 @@ void	test_shrubs(Bureaucrat &bcat)
 	AForm *test_form = intern.makeForm("ShrubberyCreationForm", "Raspberry");
 	if (!test_form)
 		return ;
-	std::cout	<< "Testing bureaucrat " << bcat
+	std::cout	<< "Testing bureaucrat " << bcat.getName()
 	   			<< " with form " << *test_form << std::endl;
-	try {
-		bcat.signForm( *test_form );
-		bcat.executeForm( *test_form );
-	}
-	catch (Bureaucrat::GradeException &e) {
-		std::cout << e.what() << std::endl;
-	}
+	bcat.signForm( *test_form );
+	bcat.executeForm( *test_form );
 	delete test_form;
 }
 
@@ -95,8 +79,8 @@ void	test_bureaucrat(std::string test_name, int test_grade)
 int	main(void)
 {
 	test_bureaucrat("Peter", 42);
-	//test_bureaucrat("Bernie", 1);
-	//test_bureaucrat("Helena", 150);
-	//test_bureaucrat("Gareth", 0);
+	test_bureaucrat("Bernie", 1);
+	test_bureaucrat("Helena", 151);
+	test_bureaucrat("Gareth", 0);
 	return (0);
 }

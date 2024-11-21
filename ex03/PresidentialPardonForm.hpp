@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/10/30 13:33:49 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:38:35 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 class	PresidentialPardonForm : public AForm
 {
 	public:
-		PresidentialPardonForm	( void );
 		PresidentialPardonForm	( std::string target );
 		PresidentialPardonForm	( const PresidentialPardonForm &other );
 		PresidentialPardonForm	&operator=( const PresidentialPardonForm &other );
@@ -28,6 +27,7 @@ class	PresidentialPardonForm : public AForm
 		void		execute(Bureaucrat const &executor) const;
 		std::string getTarget( void ) const;
 	private:
+		PresidentialPardonForm	( void );
 		std::string	const	_target;
 } ;
 

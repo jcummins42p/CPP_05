@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/20 15:40:01 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:20:15 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 class	Bureaucrat
 {
 	public:
-		Bureaucrat	( void );
 		Bureaucrat	( std::string name, int grade );
 		Bureaucrat	( const Bureaucrat &other );
 		Bureaucrat	&operator=( const Bureaucrat &other );
@@ -32,6 +31,8 @@ class	Bureaucrat
 
 		std::string		getName() const;
 		int				getGrade() const;
+
+		void			testGrade( int grade );
 
 		void			incrementGrade();
 		void			decrementGrade();
@@ -59,6 +60,8 @@ class	Bureaucrat
 		} ;
 
 	private:
+		Bureaucrat	( void );
+
 		const std::string	_name;
 		int					_grade;
 } ;
@@ -67,4 +70,3 @@ class	Bureaucrat
 std::ostream	&operator<<( std::ostream &os, const Bureaucrat &bcrat );
 
 #endif
-
