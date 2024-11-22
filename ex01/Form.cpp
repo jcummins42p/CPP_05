@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/21 12:25:53 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:27:00 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Form::Form( void ) :
 	_is_signed(false)
 {}
 
-Form::Form( std::string name, int sign, int exec ) :
+Form::Form( const std::string &name, const int &sign, const int &exec ) :
 	_name(name),
 	_sign_requirement(sign),
 	_exec_requirement(exec),

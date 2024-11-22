@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/21 14:43:31 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:30:42 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ AForm::AForm( void ) :
 	_is_signed(false)
 {	std::cout << "Constructed new default form: " << *this << std::endl;}
 
-AForm::AForm( std::string name, int sign, int exec ) :
+AForm::AForm( const std::string &name, const int &sign, const int &exec ) :
 	_name(name),
 	_sign_requirement(sign),
 	_exec_requirement(exec),

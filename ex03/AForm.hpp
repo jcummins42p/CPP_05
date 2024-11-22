@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/21 13:51:23 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:32:25 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class	Bureaucrat;
 class	AForm
 {
 	public:
-		AForm	( std::string name, int sign, int exec );
+		AForm	( const std::string &name, const int &sign, const int &exec );
 		AForm	( const AForm &other );
 		AForm	&operator=( const AForm &other );
 		virtual ~AForm	( void );

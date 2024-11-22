@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:43:14 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/21 13:09:08 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:24:57 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Bureaucrat::Bureaucrat( void ) :
 	_grade(GRADE_MIN)
 {}
 
-Bureaucrat::Bureaucrat( std::string name, int grade ) :
+Bureaucrat::Bureaucrat( const std::string &name, int grade ) :
 	_name(name),
 	_grade(grade)
 {

@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/21 13:20:15 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:24:36 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 class	Bureaucrat
 {
 	public:
-		Bureaucrat	( std::string name, int grade );
+		Bureaucrat	( const std::string &name, int grade );
 		Bureaucrat	( const Bureaucrat &other );
 		Bureaucrat	&operator=( const Bureaucrat &other );
 		~Bureaucrat	( void );

@@ -6,7 +6,7 @@
 /*   By: jcummins <jcummins@student.42prague.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 17:44:19 by jcummins          #+#    #+#             */
-/*   Updated: 2024/11/21 13:18:37 by jcummins         ###   ########.fr       */
+/*   Updated: 2024/11/22 20:26:05 by jcummins         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ class	Bureaucrat;
 class	Form
 {
 	public:
-		Form	( void );
-		Form	( std::string name, int sign, int exec );
+		Form	( const std::string &name, const int &sign, const int &exec );
 		Form	( const Form &other );
 		Form	&operator=( const Form &other );
 		~Form	( void );
@@ -56,6 +55,8 @@ class	Form
 				GradeTooLowException( int grade ) throw();
 		} ;
 	private:
+		Form	( void );
+
 		const std::string	_name;
 		const int			_sign_requirement;
 		const int			_exec_requirement;
